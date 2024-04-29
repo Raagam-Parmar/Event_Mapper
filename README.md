@@ -1,6 +1,10 @@
 # Event Mapper
 
-### Developed by : Rajdeep, Raagam Parmar and Souransu Roy
+### Developed by :
+
+- [Rajdeep (122301034)](https://github.com/rajdeep-314)
+- [Raagam Hitesh Parmar (112301024)](https://github.com/Raagam-Parmar)
+- [Souransu Roy (122301038)](https://github.com/Souransu-roy)
 
 <br>
 
@@ -12,8 +16,8 @@ There are two modes available : Visitor and Organizer. <br>
 The Visitor mode allows users to take a look at the various events that are taking place in the campus.<br>
 The Organizer mode allows users to add or remove events at various locations, on top of the functionality that the visitors have.
 
-<br>
-
+ <br>
+ 
 ### How to run
 
 Run the following command in your terminal to install Kivy :
@@ -66,3 +70,23 @@ The logout button logs out the user and takes them back to the starting page.
 - Real-time input validation has been performed on all text inputs.
 - Generator expressions have been used with functions to make some processes faster and more memory-efficient.
 - Boolean operators have been used in some places to implement basic conditionals.
+
+<br>
+
+### Contributions :
+
+i) Rajdeep :
+- Designed the starting and login pages, which manage the credentials database.
+- Designed the functionality for adding and removing events, which manages the events database.
+- Worked on the formatting of buttons, labels, and other visual elements.
+- Compiled the individual portions.
+<br>
+
+ii) Raagam Parmar Hitesh :
+- Designed the campus map in AutoCAD, using Google's satellite images as reference.
+- Designed the map page in the application that handles the map interactions.
+<br>
+
+iii) Souransu Roy :
+- Worked on the visual aspect of the landmark buttons and the displayed events.
+- Designed a base framework for storing and managing events.
