@@ -206,8 +206,8 @@ class LoginPage(Screen):
         self.password_input = TextInput(multiline = False, font_size = 23, font_name = "CamingoCode", background_color = (1, 1, 1, 1), password = True, pos_hint = {"x":0.5, "center_y":0.45}, size = (dp(300), dp(45)), size_hint = (None, None))
         self.username_input.bind(text = self.validate_username)
         self.password_input.bind(text = self.validate_password)
-        self.button_sign_in = Button(text = "Sign in", font_name = "CooperHewitt", bold = True, font_size = 38, background_color = (0.8, 0.578, 0, 1), background_normal = "", background_down = "", color = (0, 0, 0, 1), pos_hint = {"right":0.48, "y": 0.13}, size = (dp(250), dp(65)), size_hint = (None, None))
-        self.button_sign_up = Button(text = "Sign up", font_name = "CooperHewitt", bold = True, font_size = 38, background_color = (0.8, 0.578, 0, 1), background_normal = "", background_down = "", color = (0, 0, 0, 1), pos_hint = {"x":0.52, "y": 0.13}, size = (dp(250), dp(65)), size_hint = (None, None))
+        self.button_sign_in = Button(text = "Sign in", font_name = "CooperHewitt", bold = True, font_size = 38, background_color = (0.659, 0.416, 0.13, 1), background_normal = "", background_down = "", color = (1, 1, 1, 1), pos_hint = {"right":0.48, "y": 0.13}, size = (dp(250), dp(65)), size_hint = (None, None))
+        self.button_sign_up = Button(text = "Sign up", font_name = "CooperHewitt", bold = True, font_size = 38, background_color = (0.659, 0.416, 0.13, 1), background_normal = "", background_down = "", color = (1, 1, 1, 1), pos_hint = {"x":0.52, "y": 0.13}, size = (dp(250), dp(65)), size_hint = (None, None))
         self.button_sign_in.bind(on_press = self.pressed_sign_in, on_release = self.released_sign_in)
         self.button_sign_up.bind(on_press = self.pressed_sign_up, on_release = self.released_sign_up)
         self.button_instructions = Button(text = "i", font_name = "CamingoCode", font_size = 25, color = (1, 1, 1, 1), background_color = (0, 0, 0, 0), background_normal = "", background_down = "", pos_hint = {"right":0.97, "top":0.97}, size = (dp(40), dp(40)), size_hint = (None, None))
@@ -300,12 +300,12 @@ class LoginPage(Screen):
 
     def pressed_sign_in(self, instance):
         self.button_sign_in.background_color = (0.5, 0.5, 0.5, 1)
-        self.button_sign_in.color = (0.15, 0.35, 0.35, 1)
+        self.button_sign_in.color = (0, 0, 0, 1)
     
     
     def released_sign_in(self, instance):
-        self.button_sign_in.background_color = (0.8, 0.578, 0, 1)
-        self.button_sign_in.color = (0, 0, 0, 1)
+        self.button_sign_in.background_color = (0.659, 0.416, 0.13, 1)
+        self.button_sign_in.color = (1, 1, 1, 1)
 
         username = self.username_input.text
         password = self.password_input.text
@@ -340,12 +340,12 @@ class LoginPage(Screen):
 
     def pressed_sign_up(self, instance):
         self.button_sign_up.background_color = (0.5, 0.5, 0.5, 1)
-        self.button_sign_up.color = (0.15, 0.35, 0.35, 1)
+        self.button_sign_up.color = (0, 0, 0, 1)
         
 
     def released_sign_up(self, instance):
-        self.button_sign_up.background_color = (0.8, 0.578, 0, 1)
-        self.button_sign_up.color = (0, 0, 0, 1)
+        self.button_sign_up.background_color = (0.659, 0.416, 0.13, 1)
+        self.button_sign_up.color = (1, 1, 1, 1)
     
         username = self.username_input.text
         password = self.password_input.text
