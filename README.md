@@ -16,25 +16,32 @@ The Organizer mode allows users to add or remove events at various locations, on
 
 ### How to run
 
-Run the following command in your terminal to install kivy :
+Run the following command in your terminal to install Kivy :
+<br>
+
 ```
 pip install kivy
 ```
 <br>
+
 Download and extract the zip file from the repository. Open the directory in your terminal and run the following command to run `main.py` :
 <br><br>
 
 - LINUX / MacOS:
+
+<br>
+
 ```
 python3 main,py
 ```
+<br>
 
 - Windows:
+<br>
+
 ```
 python main.py
 ```
-
-
 
 <br>
 
