@@ -21,7 +21,6 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.scatterlayout import ScatterLayout
 from kivy.core.text import LabelBase
-from kivy.graphics import *
 from kivy.core.window import Window
 from kivy.metrics import dp
 
@@ -93,8 +92,8 @@ buttons_names = list(relative_coordinates_dict.keys())
 # Global variable to keep track of the currently logged in user (or visitor)
 current_username = ""
 
-username_acceptable = string.ascii_letters + string.digits + "@_" # String of characters acceptable in a username
-password_acceptable = username_acceptable + "$#*-" # String of characters acceptable in a password
+username_acceptable = string.ascii_letters + string.digits + "@_"  # String of characters acceptable in a username
+password_acceptable = username_acceptable + "$#*-"  # String of characters acceptable in a password
 
 
 # Some useful functions
@@ -147,7 +146,7 @@ class WindowsManager(ScreenManager):
     def __init__(self, **kwargs):
         super(WindowsManager, self).__init__(**kwargs)
 
-        global login_page # Being global enables log out and home buttons to function
+        global login_page  # Being global enables log out and home buttons to function
         login_page = LoginPage(name="login")
 
         # Adding the three screens to the manager
@@ -164,7 +163,8 @@ class StartingPage(Screen):
         self.layout = FloatLayout()
         self.background_layout = FloatLayout()
 
-        self.background_layout.add_widget(Image(source="images/logo.png", allow_stretch=False, keep_ratio=True)) # Logo in the background
+        self.background_layout.add_widget(
+            Image(source="images/logo.png", allow_stretch=False, keep_ratio=True))  # Logo in the background
 
         self.layout.add_widget(self.background_layout)
 
@@ -206,7 +206,7 @@ class StartingPage(Screen):
         self.button_visitor.color = white
 
         self.manager.transition.direction = "left"
-        self.manager.current = "map" # Go to the map screen
+        self.manager.current = "map"  # Go to the map screen
 
     def pressed_organiser(self, instance):
         self.button_organiser.background_color = white
@@ -218,7 +218,7 @@ class StartingPage(Screen):
 
         self.manager.transition = SlideTransition()
         self.manager.transition.direction = "up"
-        self.manager.current = "login" # Go to the login screen
+        self.manager.current = "login"  # Go to the login screen
 
 
 # Login page screen
@@ -227,7 +227,7 @@ class LoginPage(Screen):
         super(LoginPage, self).__init__(**kwargs)
 
         self.layout = FloatLayout()
-        self.password_mode = True # password_mode:True --> Password is hidden
+        self.password_mode = True  # password_mode:True --> Password is hidden
 
         self.layout.add_widget(
             Label(text="Log In",
@@ -376,7 +376,7 @@ class LoginPage(Screen):
 
         self.manager.transition = SlideTransition()
         self.manager.transition.direction = "down"
-        self.manager.current = "starting" # Go back to the starting page
+        self.manager.current = "starting"  # Go back to the starting page
 
     def pressed_instructions(self, instance):
         self.button_instructions.background_color = dark_gray
@@ -385,18 +385,18 @@ class LoginPage(Screen):
     def released_instructions(self, instance):
         self.button_instructions.background_color = transparent
         self.button_instructions.color = white
-        
+
         # Instructions for defining a new username and password
         multiline_instructions = Label(text='''
         Instructions for username :
-        
+
         -  Minimum allowed length is 4 characters
         -  Allowed characters : Alphanumeric (A-Z, a-z, 0-9) and symbols (@_)
         -  Maximum allowed length is 20 characters
-                                       
+
 
         Instructions for password :
-                                       
+
         -  Minimum allowed length is 4
         -  Allowed characters : Alphanumeric (A-Z, a-z, 0-9) and symbols (@_$#*-)
         -  Maximum allowed length is 20 characters
@@ -454,16 +454,17 @@ class LoginPage(Screen):
             if username not in credentials_dict.keys():  # When the username doesn't exist
                 self.show_error_message("This username does not exist, please sign up")
 
-            elif credentials_dict[username] == hashlib.sha512(password.encode()).hexdigest(): # Successfully logged in
+            elif credentials_dict[username] == hashlib.sha512(password.encode()).hexdigest():  # Successfully logged in
                 global current_username
-                current_username = username # Updating the global variable
+                current_username = username  # Updating the global variable
 
                 self.manager.transition.direction = "left"
-                self.manager.current = "map" # Go to map screen as an organiser
-                self.reset_entries() # Reset input fields
+                self.manager.current = "map"  # Go to map screen as an organiser
+                self.reset_entries()  # Reset input fields
             else:
-                self.show_error_message("Incorrect password, please try again") # Username exists, but the passwords don't match
-                self.password_input.text = "" # Emptying the password field
+                self.show_error_message(
+                    "Incorrect password, please try again")  # Username exists, but the passwords don't match
+                self.password_input.text = ""  # Emptying the password field
 
     def reset_entries(self):
         self.username_input.text = ""
@@ -492,18 +493,18 @@ class LoginPage(Screen):
             self.show_error_message("Password must be no longer than 20 characters")
         elif len(password) < 4:
             self.show_error_message("Password must be at least 4 characters in length")
-        elif username in credentials_dict.keys(): # Username is already signed up
+        elif username in credentials_dict.keys():  # Username is already signed up
             self.show_error_message("This username is taken, please try again")
             self.reset_entries()
         else:
-            with open("credentials.txt", "a") as credentials_file: # Append new credentials in the database
+            with open("credentials.txt", "a") as credentials_file:  # Append new credentials in the database
                 credentials_file.write(username + ":" + hashlib.sha512(password.encode()).hexdigest() + "\n")
 
             global current_username
-            current_username = username # Update the global variable
+            current_username = username  # Update the global variable
 
             self.manager.transition.direction = "left"
-            self.manager.current = "map" # Go to map screen
+            self.manager.current = "map"  # Go to map screen
             self.reset_entries()
 
     def get_credentials_dict(self, file_object):
@@ -562,10 +563,10 @@ class MapParent(FloatLayout):
     # For home/logout button
     def back_button_pressed(self, instance):
         self.parent.manager.transition.direction = "right"
-        self.parent.manager.current = "starting" # Go to starting page
-        
+        self.parent.manager.current = "starting"  # Go to starting page
+
         global current_username
-        current_username = "" # Update the global variable to indicate a logout
+        current_username = ""  # Update the global variable to indicate a logout
 
     def update(self, instance):
         # Keeping the map in the screen's bounds
@@ -598,9 +599,9 @@ class MapParent(FloatLayout):
                 self.reset_params()
 
         if self.parent.manager.current == "starting":
-            login_page.pressed_eye(forced=True) # Initializing login page with a hidden password field
-            login_page.released_eye() # Simulating a press of the `eye` button`
-            login_page.reset_entries() # Initializing the login page with empty fields
+            login_page.pressed_eye(forced=True)  # Initializing login page with a hidden password field
+            login_page.released_eye()  # Simulating a press of the `eye` button`
+            login_page.reset_entries()  # Initializing the login page with empty fields
 
     # Resetting the map to the default size
     def reset_params(self):
@@ -879,9 +880,8 @@ class MapScreen(ScatterLayout):
         # Obtaining a dictionary for the events
         events_dict = {entry.split("||")[0]: entry.split("||")[1].split("|") for entry in events_data}
 
-
         # Input Validation
-        if not (name and date and time and description): # IF one of the fields is empty
+        if not (name and date and time and description):  # IF one of the fields is empty
             self.error_popup("Please fill all entries")
 
         elif len(date) != 10:  # Invalid date length
@@ -891,21 +891,24 @@ class MapScreen(ScatterLayout):
 
             days_in_month = [31, 28 + is_leap(get_year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
-            if get_month > 12 or get_date > days_in_month[get_month - 1]: # Invalid date parameters
+            if get_month > 12 or get_date > days_in_month[get_month - 1]:  # Invalid date parameters
                 self.error_popup("Invalid date")
             elif len(time) != 5:  # Invalid time length
                 self.error_popup("Invalid time")
             else:
                 get_hours, get_minutes = int(time[:2]), int(time[3:])
 
-                if get_hours >= 24 or get_minutes >= 60: # Invalid time parameters
+                if get_hours >= 24 or get_minutes >= 60:  # Invalid time parameters
                     self.error_popup("Invalid time")
                 else:
                     event_date = tuple(int(i) for i in reversed(date.split("/")))
                     event_time = tuple(int(i) for i in time.split(":"))
-                    event_datetime = datetime(*(event_date + event_time)) # Converting the new event's timing to a datetime object
+                    event_datetime = datetime(
+                        *(event_date + event_time))  # Converting the new event's timing to a datetime object
 
-                    if event_datetime < datetime.now().replace(second=0, microsecond=0): # If the new event's timing is before the current time
+                    if event_datetime < datetime.now().replace(second=0,
+                                                               microsecond=0):
+                        # If the new event's timing is before the current time
                         self.error_popup("Event timing must be after\ncurrent timing")
                     else:
                         events_names = list(events_dict.keys())
@@ -919,7 +922,8 @@ class MapScreen(ScatterLayout):
 
                         elif new_event_timing in events_name_timing.values():
                             # Handling a timing clash
-                            # Opens a popup warning the organiser of a time clash, prompting him to ignore it or change the timings
+                            # Opens a popup warning the organiser of a time clash,
+                            # prompting him to ignore it or change the timings
                             self.time_clash_popup = Popup(title="Time clash",
                                                           size=(dp(450), dp(250)),
                                                           size_hint=(None, None))
@@ -1241,5 +1245,5 @@ class EventMapperApp(App):
 
 
 if __name__ == "__main__":
-    update_events_file() # Filter out the events that have already ended
+    update_events_file()  # Filter out the events that have already ended
     EventMapperApp().run()
